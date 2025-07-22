@@ -1,0 +1,27 @@
+{{>layout/header}}
+<div class="container my-4">
+    <h2>게시글 작성</h2>
+    <form action="/posts/save" method="post">
+        <div class="mb-3">
+            <label for="category" class="form-label">카테고리</label>
+            <select class="form-select" id="category" name="categoryId" required>
+                <option value="" selected disabled>카테고리를 선택하세요</option>
+                {{#categories}}
+                    <option value="{{id}}">{{name}}</option>
+                {{/categories}}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary">작성완료</button>
+        </div>
+    </form>
+</div>
+{{>layout/footer}}

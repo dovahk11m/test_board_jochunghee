@@ -1,10 +1,10 @@
-package com.chunghee.testboard;
+package testboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestBoardJochungheeApplicationTests {
+class TestPostsJochungheeApplicationTests {
 
 	@Test
 	void contextLoads() {

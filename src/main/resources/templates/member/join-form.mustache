@@ -1,0 +1,28 @@
+{{>layout/header}}
+
+<div class="container d-flex justify-content-center" style="margin-top: 100px;">
+    <div class="card" style="width: 400px;">
+        <div class="card-body">
+            <h4 class="card-title text-center mb-4">회원가입</h4>
+            <form action="/join" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="4~20자" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="4~20자" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

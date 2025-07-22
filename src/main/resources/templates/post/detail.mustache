@@ -1,0 +1,76 @@
+{{>layout/header}}
+
+<div class="container my-4">
+    <!-- 게시글 내용 -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">{{post.title}}</h4>
+            <div>
+                <span class="text-muted me-3">작성자: {{post.authorName}}</span>
+                <span class="text-muted">작성일: {{post.createdAt}}</span>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="m-3 p-3 border rounded bg-light" style="min-height: 200px;">
+                {{{post.content}}}
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <!-- 로그인한 사용자가 게시글 주인일 경우에만 버튼 노출 -->
+            {{#post.isOwner}}
+                <a href="/posts/{{post.id}}/update-form" class="btn btn-outline-primary">수정</a>
+                <button type="button" class="btn btn-outline-danger">삭제</button>
+            {{/post.isOwner}}
+            <a href="/posts" class="btn btn-secondary">목록</a>
+        </div>
+    </div>
+
+    <!-- 댓글 목록 -->
+    <div class="mt-4">
+        <h5>댓글 ({{post.replies.size}})</h5>
+        <hr>
+        {{#post.replies}}
+            <div class="d-flex justify-content-between my-2">
+                <div>
+                    <span class="fw-bold me-2">{{authorName}}</span>
+                    <span>{{comment}}</span>
+                </div>
+                <!-- 로그인한 사용자가 댓글 주인일 경우에만 삭제 버튼 노출 -->
+                {{#isOwner}}
+                    <button class="btn btn-sm btn-outline-danger">x</button>
+                {{/isOwner}}
+            </div>
+        {{/post.replies}}
+        {{^post.replies}}
+            <div class="text-center text-muted py-3">등록된 댓글이 없습니다.</div>
+        {{/post.replies}}
+    </div>
+
+    <!-- 댓글 작성 폼 -->
+    <div class="mt-3">
+        <form>
+            <div class="input-group">
+                <textarea class="form-control" rows="2" placeholder="댓글을 입력하세요..."></textarea>
+                <button class="btn btn-primary" type="submit">등록</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ... card-footer ... -->
+<div class="card-footer text-end">
+    <!-- 로그인한 사용자가 게시글 주인일 경우에만 버튼 노출 -->
+    {{#post.isOwner}}
+        <a href="/posts/{{post.id}}/update-form" class="btn btn-outline-primary">수정</a>
+        <!-- 삭제는 POST 요청으로 처리해야 안전합니다 -->
+        <form action="/posts/{{post.id}}/delete" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
+        </form>
+    {{/post.isOwner}}
+    <a href="/posts" class="btn btn-secondary">목록</a>
+</div>
+<!-- ... -->
+
+
+{{>layout/footer}}
